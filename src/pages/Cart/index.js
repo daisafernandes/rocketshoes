@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
@@ -36,6 +37,7 @@ function Cart({ cart, total, removeFromCart, updateAmountRequest }) {
           </tr>
         </thead>
         <tbody>
+          {cart.length <= 0 && <h1>Carrinho Vazio</h1>}
           {cart.map((product) => (
             <tr>
               <td>
@@ -74,14 +76,24 @@ function Cart({ cart, total, removeFromCart, updateAmountRequest }) {
         </tbody>
       </ProductTable>
 
-      <footer>
-        <button type="button">Finalizar pedido</button>
+      {cart.length <= 0 ?
+        <>
+          <p>Adicione itens ao seu carrinho</p>
 
-        <Total>
-          <span>TOTAL</span>
-          <strong>{total}</strong>
-        </Total>
-      </footer>
+          <Link to="/" className="back">
+            Voltar
+          </Link>
+        </>
+      :
+        <footer>
+          <button type="button">Finalizar pedido</button>
+          <Total>
+            <span>TOTAL</span>
+            <strong>{total}</strong>
+          </Total>
+        </footer>
+      }
+
     </Container>
   );
 }

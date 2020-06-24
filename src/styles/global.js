@@ -32,4 +32,19 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
+  .back {
+    color: #7159c1;
+    font-size: 15px;
+    font: Roboto, sans-serif;
+    display: flex;
+    text-decoration: none;
+    margin-top: 20px;
+    font-weight: bold;
+    transition: opacity 0.2s;
+  }
+
+  .back:hover {
+  opacity: 0.8;
+}
+
 `;
