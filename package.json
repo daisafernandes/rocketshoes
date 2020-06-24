@@ -29,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "api:server": "json-server data.json -p 3333 -d 1000"
+    "api:server": "json-server server.json -p 3333 -d 1000"
   },
   "eslintConfig": {
     "extends": "react-app"
