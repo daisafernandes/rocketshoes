@@ -24,7 +24,7 @@ In the project directory, you can run:
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## json-server server.json -p 3333
+## `json-server server.json -p 3333`
 
 Runs the mock webservice 
 
