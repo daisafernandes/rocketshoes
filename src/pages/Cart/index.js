@@ -6,13 +6,14 @@ import {
   MdRemoveCircleOutline,
   MdAddCircleOutline,
   MdDelete,
+  MdRemoveShoppingCart,
 } from 'react-icons/md';
 
 import { formatPrice } from '../../util/format';
 
 import * as CartActions from '../../store/modules/cart/actions';
 
-import { Container, ProductTable, Total } from './styles';
+import { Container, ProductTable, Total, EmptyCart } from './styles';
 
 function Cart({ cart, total, removeFromCart, updateAmountRequest }) {
 
@@ -22,6 +23,21 @@ function Cart({ cart, total, removeFromCart, updateAmountRequest }) {
 
   function decrement(product) {
     updateAmountRequest(product.id, product.amount - 1);
+  }
+
+  if (!cart.length) {
+    return (
+      <Container>
+        <EmptyCart>
+          <MdRemoveShoppingCart size={140} />
+          <h2>SEU CARRINHO ESTÁ VAZIO :(</h2>
+          <p>Adicione produtos em seu carrinho.</p>
+          <Link to="/">
+            <button type="button">Adicionar</button>
+          </Link>
+        </EmptyCart>
+      </Container>
+    );
   }
 
   return (
@@ -39,7 +55,7 @@ function Cart({ cart, total, removeFromCart, updateAmountRequest }) {
         <tbody>
           {cart.length <= 0 && <h1>Carrinho Vazio</h1>}
           {cart.map((product) => (
-            <tr>
+            <tr key={product.id}>
               <td>
                 <img src={product.image} alt={product.title} />
               </td>
@@ -75,25 +91,13 @@ function Cart({ cart, total, removeFromCart, updateAmountRequest }) {
           ))}
         </tbody>
       </ProductTable>
-
-      {cart.length <= 0 ?
-        <>
-          <p>Adicione itens ao seu carrinho</p>
-
-          <Link to="/" className="back">
-            Voltar
-          </Link>
-        </>
-      :
-        <footer>
-          <button type="button">Finalizar pedido</button>
-          <Total>
-            <span>TOTAL</span>
-            <strong>{total}</strong>
-          </Total>
-        </footer>
-      }
-
+      <footer>
+        <button type="button">Finalizar pedido</button>
+        <Total>
+          <span>TOTAL</span>
+          <strong>{total}</strong>
+        </Total>
+      </footer>
     </Container>
   );
 }
