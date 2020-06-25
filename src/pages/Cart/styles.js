@@ -5,26 +5,28 @@ export const Container = styled.div`
   padding: 30px;
   background: #fff;
   border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 
   footer {
     margin-top: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
 
-    button {
-      background: #7159c1;
-      color: #fff;
-      border: 0;
-      border-radius: 4px;
-      padding: 12px 20px;
-      font-weight: bold;
-      text-transform: uppercase;
-      transition: background 0.2s;
+  footer button,
+  a button {
+    background: #7159c1;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    padding: 12px 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background 0.2s;
 
-      &:hover {
-        background: ${darken(0.05, '#7159c1')}
-      }
+    &:hover {
+      background: ${darken(0.03, '#7159c1')};
     }
   }
 `;
@@ -36,6 +38,10 @@ export const ProductTable = styled.table`
     color: #999;
     text-align: left;
     padding: 12px;
+
+    &:nth-child(3n) {
+      padding-left: 45px;
+    }
   }
 
   tbody td {
@@ -53,9 +59,9 @@ export const ProductTable = styled.table`
   }
 
   span {
+    display: block;
     margin-top: 5px;
     font-size: 18px;
-    display: block;
     font-weight: bold;
   }
 
@@ -69,6 +75,7 @@ export const ProductTable = styled.table`
       color: #666;
       padding: 6px;
       width: 50px;
+      text-align: center;
     }
   }
 
@@ -97,34 +104,21 @@ export const Total = styled.div`
 export const EmptyCart = styled.div`
   padding: 80px 50px;
   text-align: center;
+
   svg {
     fill: #ddd;
   }
+
   h2 {
     font-size: 28px;
     font-weight: bold;
     color: #333;
     margin-top: 0.3em;
   }
+
   p {
     font-size: 14px;
     color: #777;
     margin: 0.6em 0 2em;
-  }
-
-  a button {
-      background: #7159c1;
-      color: #fff;
-      border: 0;
-      border-radius: 4px;
-      padding: 12px 20px;
-      font-weight: bold;
-      text-transform: uppercase;
-      transition: background 0.2s;
-
-      &:hover {
-        background: ${darken(0.05, '#7159c1')}
-      }
-    }
   }
 `;

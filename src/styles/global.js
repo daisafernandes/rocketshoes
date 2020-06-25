@@ -4,18 +4,19 @@ import 'react-toastify/dist/ReactToastify.css';
 import background from '../assets/images/background.svg';
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+  @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
-* {
-  margin: 0;
-  padding:0;
-  outline: 0;
-  box-sizing: border-box;
+  * {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: 0;
   }
 
   body {
-    background: #191920 url(${background}) no-repeat center top;
-    -webkit-font-smoothing: antialiased;
+    background: #7159c1 url(${background}) no-repeat center top;
+    -webkit-font-smoothing: antialised;
+    min-width: 1100px;
   }
 
   body, input, button {
@@ -31,20 +32,4 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
-
-  .back {
-    color: #7159c1;
-    font-size: 15px;
-    font: Roboto, sans-serif;
-    display: flex;
-    text-decoration: none;
-    margin-top: 20px;
-    font-weight: bold;
-    transition: opacity 0.2s;
-  }
-
-  .back:hover {
-  opacity: 0.8;
-}
-
 `;

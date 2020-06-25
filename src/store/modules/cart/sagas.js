@@ -1,15 +1,28 @@
-import { call, put, select, all, takeLatest } from 'redux-saga/effects';
+import {
+  call,
+  select,
+  put,
+  all,
+  takeLatest,
+  takeEvery,
+  delay,
+} from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import api from '../../../services/api';
-// import history from '../../../services/history';
 import { formatPrice } from '../../../util/format';
 
-import { addToCartSuccess, updateAmountSuccess } from './actions';
+import {
+  addToCartSuccess,
+  updateAmountSuccess,
+  updateAmountFailure,
+} from './actions';
 
 function* addToCart({ id }) {
-  const productExists = yield select((state) =>
-    state.cart.find((p) => p.id === id)
+  yield delay(300);
+
+  const productExists = yield select(state =>
+    state.cart.products.find(p => p.id === id)
   );
 
   const stock = yield call(api.get, `/stock/${id}`);
@@ -20,9 +33,8 @@ function* addToCart({ id }) {
   const amount = currentAmount + 1;
 
   if (amount > stockAmount) {
-    toast.dark(
-      `Quantidde fora do estoque do produto, Maxima capacidade ${stockAmount}`
-    );
+    toast.error('Amount requested is out of stock.');
+    yield put(updateAmountFailure(id));
     return;
   }
 
@@ -38,7 +50,6 @@ function* addToCart({ id }) {
     };
 
     yield put(addToCartSuccess(data));
-    // history.push('/cart');
   }
 }
 
@@ -49,9 +60,7 @@ function* updateAmount({ id, amount }) {
   const stockAmount = stock.data.amount;
 
   if (amount > stockAmount) {
-    toast.dark(
-      `Quantidde fora do estoque do produto, Maxima capacidade ${stockAmount}`
-    );
+    toast.error('Amount requested is out of stock.');
     return;
   }
 
@@ -59,6 +68,6 @@ function* updateAmount({ id, amount }) {
 }
 
 export default all([
-  takeLatest('@cart/ADD_REQUEST', addToCart),
+  takeEvery('@cart/ADD_REQUEST', addToCart),
   takeLatest('@cart/UPDATE_AMOUNT_REQUEST', updateAmount),
 ]);
