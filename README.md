@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Live Demo 
+https://daisa-rocketshoes.netlify.app/
+
 ## :rocket: Technologies
 
 -  [ReactJS](https://reactjs.org/)
