@@ -57,3 +57,15 @@ export const ProductList = styled.ul`
     }
   }
 `;
+
+export const Loading = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 450px;
+  svg {
+    height: 150px;
+    width: 100px;
+    fill: #fff;
+  }
+`;

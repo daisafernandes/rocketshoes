@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Loader from 'react-loader-spinner';
 import { bindActionCreators } from 'redux';
 import { MdAddShoppingCart } from 'react-icons/md';
-import { ProductList } from './styles';
+
 import api from '../../services/api';
+
+import { ProductList, Loading } from './styles';
 import { formatPrice } from '../../util/format';
 
 import * as CartActions from '../../store/modules/cart/actions';
 
 class Home extends Component {
   state = {
-    products: []
+    products: [],
+    loading: true,
+    didMount: false,
   };
 
   async componentDidMount() {
@@ -20,7 +25,14 @@ class Home extends Component {
       ...product,
       priceFormatted: formatPrice(product.price),
     }));
-    this.setState({ products: data });
+
+    setTimeout(() => {
+      this.setState({ products: data, loading: false });
+
+      setTimeout(() => {
+        this.setState({ didMount: true });
+      }, 0);
+    }, 1000);
   }
 
   handleAddProduct = id => {
@@ -30,15 +42,22 @@ class Home extends Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { products, loading, didMount } = this.state;
     const { amount } = this.props;
 
+    if (loading) {
+      return (
+        <Loading>
+          <Loader type="Oval" color="#FFFFFF" />
+        </Loading>
+      );
+    }
+
     return (
-      <ProductList>
+      <ProductList didMount={didMount ? 1 : 0}>
         {products.map(product => (
           <li key={product.id}>
-            <img src={product.image} alt={product.title}
-            />
+            <img src={product.image} alt={product.title}/>
             <strong>{product.title}</strong>
             <span>{product.priceFormatted}</span>
 
