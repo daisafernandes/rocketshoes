@@ -33,7 +33,9 @@ function* addToCart({ id }) {
   const amount = currentAmount + 1;
 
   if (amount > stockAmount) {
-    toast.error('Amount requested is out of stock.');
+    toast.warn(
+      `Estamos quase sem estoque :(. Quantidade total: ${stockAmount}`
+    );
     yield put(updateAmountFailure(id));
     return;
   }
@@ -60,7 +62,9 @@ function* updateAmount({ id, amount }) {
   const stockAmount = stock.data.amount;
 
   if (amount > stockAmount) {
-    toast.error('Amount requested is out of stock.');
+    toast.warn(
+      `Estamos quase sem estoque :(. Quantidade total: ${stockAmount}`
+    );
     return;
   }
 

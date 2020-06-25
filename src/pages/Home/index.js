@@ -62,7 +62,7 @@ class Home extends Component {
             <button
               type="button"
               onClick={() => this.handleAddProduct(product.id)}
-              disabled={addingIds.includes(product.id)}
+              // disabled={addingIds.includes(product.id)}
             >
               <div>
                 <MdAddShoppingCart size={16} color="#FFF" />{' '}

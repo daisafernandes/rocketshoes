@@ -8,6 +8,7 @@ import './config/ReactotronConfig';
 import GlobalStyle from './styles/global';
 import Routes from './routes';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 import history from './services/history';
 import store from './store';
@@ -20,6 +21,7 @@ function App() {
         <Routes />
         <GlobalStyle />
         <ToastContainer />
+        <Footer />
       </Router>
     </Provider>
   );
