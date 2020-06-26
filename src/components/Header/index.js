@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { MdShoppingCart } from 'react-icons/md';
 
 import { formatPrice } from '../../util/format';
@@ -8,7 +8,20 @@ import { Container, Cart, Dropdown } from './styles';
 
 import logo from '../../assets/images/logo.svg';
 
-function Header({ cartSize, cart, total, location }) {
+function Header({ location }) {
+  const cartSize = useSelector(state => state.cart.products.length);
+  const cart = useSelector(state =>
+    state.cart.products.slice(0, 3).map(product => ({
+      ...product,
+      price: formatPrice(product.price),
+    }))
+  );
+  const total = useSelector(state =>
+    state.cart.products.reduce((total1, product) => {
+      return total1 + product.price * product.amount;
+    }, 0)
+  );
+
   return (
     <Container>
       <Link to="/">
@@ -48,15 +61,4 @@ function Header({ cartSize, cart, total, location }) {
   );
 }
 
-export default connect(state => ({
-  cartSize: state.cart.products.length,
-  cart: state.cart.products.slice(0, 3).map(product => ({
-    ...product,
-    price: formatPrice(product.price),
-  })),
-  total: formatPrice(
-    state.cart.products.reduce((total, product) => {
-      return total + product.price * product.amount;
-    }, 0)
-  ),
-}))(withRouter(Header));
+export default withRouter(Header);
